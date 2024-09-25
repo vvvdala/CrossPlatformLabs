@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "cpp_lab_1.csproj", "{54D126C8-0F85-45EB-A301-D01C0A7ABE39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "..\Tests\cpp_lab_1_tests.csproj", "{8350D9AB-413E-4FDD-9BCD-CC124B1F3462}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{7B5D5E2E-FE4C-45D2-BA8E-2506824B756A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54D126C8-0F85-45EB-A301-D01C0A7ABE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54D126C8-0F85-45EB-A301-D01C0A7ABE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54D126C8-0F85-45EB-A301-D01C0A7ABE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54D126C8-0F85-45EB-A301-D01C0A7ABE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8350D9AB-413E-4FDD-9BCD-CC124B1F3462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8350D9AB-413E-4FDD-9BCD-CC124B1F3462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8350D9AB-413E-4FDD-9BCD-CC124B1F3462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8350D9AB-413E-4FDD-9BCD-CC124B1F3462}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FB0D699-DFE3-4436-93D9-DFDDFA687EAD}
+	EndGlobalSection
+EndGlobal
