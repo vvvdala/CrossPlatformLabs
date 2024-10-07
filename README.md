@@ -6,14 +6,15 @@
 
 Для збірки проекту:
 ```bash
-msbuild Build.proj /t:Build
+dotnet build Build.proj -t:Build -p:Solution=Lab1
 ```
 Для запуску проекту:
 ```bash
-msbuild Build.proj /t:Run
+dotnet build Build.proj -t:Run -p:Solution=Lab1
 ```
 Для запуску тестів:
 ```bash
-msbuild Build.proj /t:Test
+dotnet build Build.proj -t:Test -p:Solution=Lab1
 ```
+*Lab1 може бути замінена на Lab2, Lab3 і т.д.
 
