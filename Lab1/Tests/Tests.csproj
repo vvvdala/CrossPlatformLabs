@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App\cpp_lab_1.csproj" />
+    <ProjectReference Include="..\App\App.csproj" />
   </ItemGroup>
 
 </Project>
