@@ -1,0 +1,22 @@
+﻿@model Newtonsoft.Json.Linq.JObject
+
+<h1>Vehicle Details</h1>
+
+<table>
+    <tr>
+        <th>Registration Number</th>
+        <td>@Model["regNumber"]</td>
+    </tr>
+    <tr>
+        <th>Manufacturer</th>
+        <td>@Model["manufacturerName"]</td>
+    </tr>
+    <tr>
+        <th>Model</th>
+        <td>@Model["modelName"]</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>@Model["vehicleCategoryCode"]</td>
+    </tr>
+</table>

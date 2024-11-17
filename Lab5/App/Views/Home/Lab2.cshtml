@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Lab 2";
+}
+
+<h2>Lab 2</h2>
+<div>
+    <p>
+        <h3>Завдання</h3>
+        Садівник посадив N дерев до одного ряду. Після посадки дерев садівнику їх потрібно пофарбувати. 
+        У його розпорядженні є фарба трьох кольорів: біла, синя та помаранчева. Скільки способів фарбування дерев 
+        є у нього, якщо жодні два сусідні дерева не можна фарбувати в однаковий колір?
+
+        <h3>Приклад</h3>
+        <h4>INPUT.TXT</h4>
+        <pre>
+    3
+        </pre>
+        <h4>OUTPUT.TXT</h4>
+        <pre>
+    12
+        </pre>
+    </p>
+
+
+
+</div>
+
+<form asp-action="RunLabs" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="inputFile">Завантажте файл INPUT.TXT:</label>
+        <input type="file" id="inputFile" name="inputFile" accept=".txt" required />
+    </div>
+    <input type="hidden" name="pathProject" value="@($"../../Lab2/App/App.csproj")" />
+    <button type="submit">Виконати</button>
+</form>
+
+@if (ViewData["Result"] != null)
+{
+    <h3>Результати:</h3>
+    <pre>@ViewData["Result"]</pre>
+}

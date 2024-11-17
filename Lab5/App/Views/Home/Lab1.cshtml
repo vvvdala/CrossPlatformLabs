@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Lab 1";
+}
+
+<h2>Lab 1</h2>
+
+<div>
+    <p>
+        <h3>Завдання</h3>
+        Толик вигадав нову технологію програмування. Він хоче умовити друзів використати її. Але все не так просто. i-й друг погодиться використовувати технологію Толіка, 
+        якщо його авторитет буде не меншим за ai (авторитет виражається цілим числом). Як тільки він почне її використовувати, до авторитету Толіка додасться число bi 
+        (трапляються люди, у яких bi < 0). Допоможіть Толіку наставити на правдивий шлях якомога більше своїх друзів.
+
+        <h3>Приклад</h3>
+        <h4>INPUT.TXT</h4>
+        <pre>
+    5 1
+    1 3
+    6 -5
+    6 -4
+    2 2
+    2 -1
+        </pre>
+        <h4>OUTPUT.TXT</h4>
+        <pre>
+    4
+    1 4 3 5
+        </pre>
+    </p>
+
+
+
+</div>
+
+<form asp-action="RunLabs" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="inputFile"><strong>Завантажте файл INPUT.TXT:</strong></label>
+        <input type="file" id="inputFile" name="inputFile" accept=".txt" required />
+    </div>
+    <input type="hidden" name="pathProject" value="@($"../../Lab1/App/App.csproj")" />
+    <button type="submit">Виконати</button>
+</form>
+
+@if (ViewData["Result"] != null)
+{
+    <h3>Результати:</h3>
+    <pre>@ViewData["Result"]</pre>
+}

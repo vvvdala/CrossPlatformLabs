@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "linux" do |linux|
+    config.vm.network "forwarded_port", guest: 5555, host: 1234
+    linux.vm.box = "bento/ubuntu-20.04"
+
+    linux.vm.provider "virtualbox" do |vb|
+      vb.memory = 2048
+      vb.cpus = 1
+      vb.name = "VM_Linux"
+      vb.gui = false
+    end
+
+    linux.vm.provision "shell", path: "provision_lin.sh"
+  end
+
+  config.vm.define "windows" do |windows|
+    config.vm.network "forwarded_port", guest: 5555, host: 1235
+    config.vm.boot_timeout = 600
+    windows.vm.box = "gusztavvargadr/windows-10"
+
+    windows.vm.provider "virtualbox" do |vb|
+      vb.memory = 2048
+      vb.cpus = 1
+      vb.name = "VM_Windows"
+      vb.gui = false
+    end
+
+    windows.vm.communicator = "winrm"
+
+    windows.vm.provision "shell", path: "provision_win.sh"
+  end
+
+  # Робоча версія macos на vm підтримує тільки net 4.0, тому с застосунком net 8.0 він не буде працювати
+end

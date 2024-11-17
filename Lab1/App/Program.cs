@@ -7,8 +7,25 @@ namespace cpp_lab_1
         {
             string nameInput = "INPUT.TXT";
             string nameOutput = "OUTPUT.TXT";
-
-            FindMaxFriends(nameInput, nameOutput);
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "--input" && i + 1 < args.Length)
+                {
+                    nameInput = args[i + 1];
+                }
+                else if (args[i] == "--output" && i + 1 < args.Length)
+                {
+                    nameOutput = args[i + 1];
+                }
+            }
+            try
+            {
+                FindMaxFriends(nameInput, nameOutput);
+            }
+            catch(Exception e)
+            { 
+                Console.WriteLine("Помилка:" + e.Message);
+            }
         }
 
         public static void FindMaxFriends(string input, string output)

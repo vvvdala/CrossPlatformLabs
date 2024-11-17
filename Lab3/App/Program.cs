@@ -21,7 +21,27 @@ namespace CPP_Lab_3
             string nameInput = "INPUT.txt";
             string nameOutput = "OUTPUT.txt";
 
-            FindMaxIndigo(nameInput, nameOutput);
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "--input" && i + 1 < args.Length)
+                {
+                    nameInput = args[i + 1];
+                }
+                else if (args[i] == "--output" && i + 1 < args.Length)
+                {
+                    nameOutput = args[i + 1];
+                }
+            }
+
+            try
+            {
+                FindMaxIndigo(nameInput, nameOutput);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Помилка:" + e.Message);
+            }
+
         }
 
         public static void FindMaxIndigo(string input, string output)

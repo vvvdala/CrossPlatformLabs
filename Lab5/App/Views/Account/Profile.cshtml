@@ -1,0 +1,24 @@
+﻿@model App.Controllers.UserProfile
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h2>Профіль користувача</h2>
+
+<div class="user-profile">
+    <img src="@Model.Picture" alt="Profile Picture" style="max-width: 150px; border-radius: 50%;" />
+    <h3>@Model.Name</h3>
+    <p><strong>Email:</strong> @Model.Email</p>
+    
+    @if (Model.UserMetadata != null)
+    {
+        <h4>User Metadata</h4>
+        <ul>
+            @foreach (var item in Model.UserMetadata.GetType().GetProperties())
+            {
+                <li><strong>@item.Name:</strong> @item.GetValue(Model.UserMetadata)</li>
+            }
+        </ul>
+    }
+</div>

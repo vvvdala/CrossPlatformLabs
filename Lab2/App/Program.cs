@@ -8,7 +8,27 @@ namespace cpp_lab_2
             string input = "INPUT.TXT";
             string output = "OUTPUT.TXT";
 
-            PaintingMethod(input, output);
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "--input" && i + 1 < args.Length)
+                {
+                    input = args[i + 1];
+                }
+                else if (args[i] == "--output" && i + 1 < args.Length)
+                {
+                    output = args[i + 1];
+                }
+            }
+
+            try
+            {
+                PaintingMethod(input, output);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Помилка:" + e.Message);
+            }
+
         }
 
         static public void PaintingMethod(string input, string output)

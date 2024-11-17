@@ -1,0 +1,29 @@
+﻿  @model Newtonsoft.Json.Linq.JArray
+
+  <table>
+      <thead>
+          <tr>
+              <th>Booking ID</th>
+              <th>Customer Name</th>
+              <th>Vehicle Registration Number</th>
+              <th>Status Code</th>
+              <th>Status Description</th>
+              <th>Date From</th>
+              <th>Date To</th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach (var booking in Model)
+          {
+              <tr>
+                  <td>@booking["bookingId"]</td>
+                  <td>@booking["customerName"]</td>
+                  <td>@booking["vehicleRegNumber"]</td>
+                  <td>@booking["statusCode"]</td>
+                  <td>@booking["statusDescription"]</td>
+                  <td>@booking["dateFrom"]</td>
+                  <td>@booking["dateTo"]</td>
+              </tr>
+          }
+      </tbody>
+  </table>

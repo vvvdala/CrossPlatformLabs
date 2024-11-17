@@ -1,0 +1,29 @@
+﻿@model Newtonsoft.Json.Linq.JArray
+
+<h1>Bookings</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Status</th>
+            <th>Date From</th>
+            <th>Date To</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking["bookingId"]</td>
+                <td>@booking["bookingStatus"]["bookingStatusDescription"]</td>
+                <td>@booking["dateFrom"]</td>
+                <td>@booking["dateTo"]</td>
+                <td>
+                    <a asp-action="BookingDetails" asp-route-bookingId="@(booking["bookingId"])">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

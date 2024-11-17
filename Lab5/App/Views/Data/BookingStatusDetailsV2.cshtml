@@ -1,0 +1,14 @@
+﻿@model Newtonsoft.Json.Linq.JObject
+
+<h1>Booking Status Details</h1>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <td>@Model["createdDate"]</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>@Model["bookingStatusDescription"]</td>
+    </tr>
+</table>

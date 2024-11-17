@@ -1,0 +1,29 @@
+﻿@model Newtonsoft.Json.Linq.JArray
+
+<h1>Vehicles</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Registration Number</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle["regNumber"]</td>
+                <td>@vehicle["manufacturerName"]</td>
+                <td>@vehicle["modelName"]</td>
+                <td>@vehicle["vehicleCategoryCode"]</td>
+                <td>
+                    <a asp-action="VehicleDetails" asp-route-regNumber="@(vehicle["regNumber"])">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
