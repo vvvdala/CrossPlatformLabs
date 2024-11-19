@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Session;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,26 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(traceBuilder =>
+    {
+        traceBuilder
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Lab5"))
+            .AddAspNetCoreInstrumentation()
+            .AddSqlClientInstrumentation()
+            .AddZipkinExporter(options =>
+            {
+                options.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+            });
+    })
+    .WithMetrics(metricBuilder =>
+    {
+        metricBuilder
+            .AddAspNetCoreInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddPrometheusExporter();
+    });
 
 builder.Services.AddSession(options =>
 {
@@ -60,4 +83,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.Run();

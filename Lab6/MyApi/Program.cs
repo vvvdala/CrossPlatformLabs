@@ -7,6 +7,9 @@ using Asp.Versioning;
 using System;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbProvider = builder.Configuration["DatabaseProvider"];
@@ -52,6 +55,26 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
+builder.Services.AddOpenTelemetry()
+    .WithTracing(traceBuilder =>
+    {
+        traceBuilder
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Lab6"))
+            .AddAspNetCoreInstrumentation()
+            .AddSqlClientInstrumentation()
+            .AddZipkinExporter(options =>
+            {
+                options.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+            });
+    })
+    .WithMetrics(metricBuilder =>
+    {
+        metricBuilder
+            .AddAspNetCoreInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddPrometheusExporter();
+    });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -78,6 +101,8 @@ app.UseCors("AllowMyApp");
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
 using (var scope = app.Services.CreateScope())
 {

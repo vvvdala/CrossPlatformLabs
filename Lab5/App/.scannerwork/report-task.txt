@@ -1,0 +1,6 @@
+projectKey=Lab5
+serverUrl=http://localhost:9000
+serverVersion=10.7.0.96327
+dashboardUrl=http://localhost:9000/dashboard?id=Lab5
+ceTaskId=f3634d1d-2f30-4594-8287-251e14bdbdaa
+ceTaskUrl=http://localhost:9000/api/ce/task?id=f3634d1d-2f30-4594-8287-251e14bdbdaa

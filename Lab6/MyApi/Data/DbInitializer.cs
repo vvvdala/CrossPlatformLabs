@@ -76,17 +76,62 @@ namespace MyApi.Data
 
             if (!appDbContext.Bookings.Any())
             {
-                appDbContext.Bookings.AddRange(
-                    new Booking { BookingStatusCode = "NEW", CustomerId = 1, RegNumber = "V001", DateFrom = DateTime.Now, DateTo = DateTime.Now.AddDays(3), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" },
-                    new Booking { BookingStatusCode = "CON", CustomerId = 2, RegNumber = "V002", DateFrom = DateTime.Now.AddDays(1), DateTo = DateTime.Now.AddDays(4), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" },
-                    new Booking { BookingStatusCode = "CNC", CustomerId = 3, RegNumber = "V003", DateFrom = DateTime.Now.AddDays(2), DateTo = DateTime.Now.AddDays(5), ConfirmationLetterSentYN = "N", PaymentReceivedYN = "N" },
-                    new Booking { BookingStatusCode = "PND", CustomerId = 4, RegNumber = "V004", DateFrom = DateTime.Now.AddDays(3), DateTo = DateTime.Now.AddDays(6), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "N" },
-                    new Booking { BookingStatusCode = "CMP", CustomerId = 5, RegNumber = "V005", DateFrom = DateTime.Now.AddDays(4), DateTo = DateTime.Now.AddDays(7), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" }
-                );
+                //appDbContext.Bookings.AddRange(
+                //    new Booking { BookingStatusCode = "NEW", CustomerId = 1, RegNumber = "V001", DateFrom = DateTime.Now, DateTo = DateTime.Now.AddDays(3), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" },
+                //    new Booking { BookingStatusCode = "CON", CustomerId = 2, RegNumber = "V002", DateFrom = DateTime.Now.AddDays(1), DateTo = DateTime.Now.AddDays(4), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" },
+                //    new Booking { BookingStatusCode = "CNC", CustomerId = 3, RegNumber = "V003", DateFrom = DateTime.Now.AddDays(2), DateTo = DateTime.Now.AddDays(5), ConfirmationLetterSentYN = "N", PaymentReceivedYN = "N" },
+                //    new Booking { BookingStatusCode = "PND", CustomerId = 4, RegNumber = "V004", DateFrom = DateTime.Now.AddDays(3), DateTo = DateTime.Now.AddDays(6), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "N" },
+                //    new Booking { BookingStatusCode = "CMP", CustomerId = 5, RegNumber = "V005", DateFrom = DateTime.Now.AddDays(4), DateTo = DateTime.Now.AddDays(7), ConfirmationLetterSentYN = "Y", PaymentReceivedYN = "Y" }
+                //);
+
+                var bookings = GenerateBookings();
+                
+                appDbContext.Bookings.AddRange(bookings);
             }
 
             appDbContext.SaveChanges();
 
+        }
+
+        private static Booking[] GenerateBookings()
+        {
+            var testData = new List<Booking>();
+            var random = new Random();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var booking = new Booking
+                {
+                    BookingStatusCode = GetRandomBookingStatusCode(random),
+                    CustomerId = random.Next(1, 5),
+                    RegNumber = GetRandomRegNumber(random),
+                    DateFrom = DateTime.Now.AddDays(random.Next(0, 30)),
+                    DateTo = DateTime.Now.AddDays(random.Next(31, 60)),
+                    ConfirmationLetterSentYN = random.Next(0,2) == 0 ? "Y" : "N",
+                    PaymentReceivedYN = random.Next(0,2) == 0 ? "Y" : "N",
+                };
+
+                testData.Add(booking);
+
+            }
+
+            return testData.ToArray();
+        }
+
+        private static string GetRandomBookingStatusCode(Random random)
+        {
+            string[] statusCodes = { "NEW", "CON", "CNC", "PND", "CMP" };
+            int randStatucCode = random.Next(statusCodes.Length);
+
+            return statusCodes[randStatucCode];
+        }
+
+        private static string GetRandomRegNumber(Random random)
+        {
+            string[] statusCodes = { "V001", "V002", "V003", "V004", "V005" };
+            int randStatucCode = random.Next(statusCodes.Length);
+
+            return statusCodes[randStatucCode];
         }
     }
 }

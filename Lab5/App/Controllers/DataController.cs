@@ -17,7 +17,16 @@ namespace App.Controllers
         public async Task<JArray> GetObjects(string controller, string? version = null)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"{_apiUrl}/api/v{version}/{controller}");
+            HttpResponseMessage response = null;
+
+            if (!string.IsNullOrEmpty(version))
+            {
+                response = await client.GetAsync($"{_apiUrl}/api/v{version}/{controller}");
+            }
+            else
+            {
+                response = await client.GetAsync($"{_apiUrl}/api/{controller}");
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -34,13 +43,17 @@ namespace App.Controllers
             var client = _httpClientFactory.CreateClient();
             HttpResponseMessage response = null;
 
-            if (!string.IsNullOrEmpty(string_id))
+            if (!string.IsNullOrEmpty(string_id) && !string.IsNullOrEmpty(version))
             {
                 response = await client.GetAsync($"{_apiUrl}/api/v{version}/{controller}/{string_id}");
             }
-            if (int_id.HasValue) 
+            else if (int_id.HasValue && !string.IsNullOrEmpty(version)) 
             { 
                 response = await client.GetAsync($"{_apiUrl}/api/v{version}/{controller}/{int_id}");
+            }
+            else
+            {
+                response = await client.GetAsync($"{_apiUrl}/api/{controller}/{int_id}");
             }
 
             if (response != null && response.IsSuccessStatusCode)

@@ -1,0 +1,6 @@
+projectKey=Lab6
+serverUrl=http://localhost:9000
+serverVersion=10.7.0.96327
+dashboardUrl=http://localhost:9000/dashboard?id=Lab6
+ceTaskId=d2de8fd2-77ba-47b2-8ae3-3b59b640dd0e
+ceTaskUrl=http://localhost:9000/api/ce/task?id=d2de8fd2-77ba-47b2-8ae3-3b59b640dd0e
